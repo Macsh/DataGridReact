@@ -7,6 +7,14 @@
     padding: 5px 10px;
 }
 
-.d-tree-toogler.active {
-    transform: rotate(45deg);
+.d-tree-toggler.active {
+    visibility: hidden;
+}
+
+.d-tree-toggler.active::after{
+    margin-left:-16px;
+    content: "–\a0\a0";
+    display: inline;
+    position: relative;
+    visibility: visible;
 }

@@ -13,11 +13,20 @@ export const TreeNodes = ({node}) => {
     const [dataWriteStates, setDataWriteStates] = useContext(StatesWriteContext);
     const hasChild = node.children ? true : false;
 
-    const addReadStates = () => {
-        setDataReadStates([
-            ...dataReadStates,
-            {"id" : node.id, "checkState" : "checked"}
-        ])
+    function addReadStates() {
+        const check = getReadStateById(node.id);
+        if (check === undefined){
+            setDataReadStates([
+                ...dataReadStates,
+                {"id" : node.id, "checkState" : "checked"}
+            ])
+        }
+        else if (check === 'unchecked'){
+            dataReadStates.find((i) => i.id === node.id).checkState = 'checked';
+        }
+        else if (check === 'checked'){
+            dataReadStates.find((i) => i.id === node.id).checkState = 'unchecked';
+        }
     }
 
     const addWriteStates = () => {
@@ -47,7 +56,7 @@ export const TreeNodes = ({node}) => {
                 <div className="d-flex" onClick={e => setNodeVisibility(v => !v)}>
                 {hasChild && node.children.length > 0 && (
                     <div className={`d-inline d-tree-toggler ${ nodeVisible ? "active" : ""}`}>
-                        O &nbsp;
+                        + &nbsp;
                     </div>
                 )}
 
@@ -58,9 +67,8 @@ export const TreeNodes = ({node}) => {
                 <div className="d-flex">
                     <div>
                         <Checkbox 
-                        isChecked={getReadStateById(node.id) === "checked"}
-                        isInbetween={getReadStateById(node.id) === "inbetween"}
                         onClick={addReadStates}
+                        id={node.id}
                         />
                     </div>
                     <div>
