@@ -1,8 +1,7 @@
-import React, {useContext} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { TreeNodes } from "../TreeNodes";
-
 
 export const Tree = ({ datas = [] }) => {
 

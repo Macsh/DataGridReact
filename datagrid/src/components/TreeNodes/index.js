@@ -9,19 +9,13 @@ import './index.css';
 export const TreeNodes = ({node}) => {
 
     const [nodeVisible, setNodeVisibility] = useState(false);
-    const [dataReadStates, setDataReadStates] = useContext(StatesReadContext);
-    const [dataWriteStates, setDataWriteStates] = useContext(StatesWriteContext);
+    const [dataReadStates] = useContext(StatesReadContext);
+    const [dataWriteStates] = useContext(StatesWriteContext);
     const hasChild = node.children ? true : false;
 
     function addReadStates() {
         const check = getReadStateById(node.id);
-        if (check === undefined){
-            setDataReadStates([
-                ...dataReadStates,
-                {"id" : node.id, "checkState" : "checked"}
-            ])
-        }
-        else if (check === 'unchecked'){
+        if (check === 'unchecked'){
             dataReadStates.find((i) => i.id === node.id).checkState = 'checked';
         }
         else if (check === 'checked'){
@@ -30,22 +24,25 @@ export const TreeNodes = ({node}) => {
     }
 
     const addWriteStates = () => {
-        setDataWriteStates([
-            ...dataWriteStates,
-            {"id" : node.id, "checkState" : "checked"}
-        ])
+        const check = getWriteStateById(node.id);
+        if (check === 'unchecked'){
+            dataWriteStates.find((i) => i.id === node.id).checkState = 'checked';
+        }
+        else if (check === 'checked'){
+            dataWriteStates.find((i) => i.id === node.id).checkState = 'unchecked';
+        }
     }
 
     const getReadStateById = (id) => {
         var checkState = dataReadStates.find((i) => i.id === id);
-        if(checkState != undefined){
+        if(checkState !== undefined){
             return dataReadStates.find((i) => i.id === id).checkState;
         }
     }
 
     const getWriteStateById = (id) => {
         var checkState = dataWriteStates.find((i) => i.id === id);
-        if(checkState != undefined){
+        if(checkState !== undefined){
             return dataWriteStates.find((i) => i.id === id).checkState;
         }
     }
@@ -69,13 +66,14 @@ export const TreeNodes = ({node}) => {
                         <Checkbox 
                         onClick={addReadStates}
                         id={node.id}
+                        type='read'
                         />
                     </div>
                     <div>
                         <Checkbox 
-                        isChecked={getWriteStateById(node.id) === "checked"}
-                        isInbetween={getWriteStateById(node.id) === "inbetween"}
                         onClick={addWriteStates}
+                        id={node.id}
+                        type='write'
                         />
                     </div>
                 </div>
