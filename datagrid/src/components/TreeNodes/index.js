@@ -1,10 +1,10 @@
 import React, {useContext, useState} from "react";
 import { StatesReadContext } from "../StatesContext";
 import { StatesWriteContext } from "../StatesContext";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
 import { Tree } from "../Tree";
 import { Checkbox } from "../Checkbox";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
 export const TreeNodes = ({node}) => {
 
@@ -13,22 +13,32 @@ export const TreeNodes = ({node}) => {
     const [dataWriteStates, setDataWriteStates] = useContext(StatesWriteContext);
     const hasChild = node.children ? true : false;
 
-    // const getStateById = (id) => {
-    //     return checkState.find((i) => i.id === id).state;
-    // };
-
-    function addReadStates() {
+    const addReadStates = () => {
         setDataReadStates([
             ...dataReadStates,
             {"id" : node.id, "checkState" : "checked"}
         ])
     }
 
-    function addWriteStates() {
+    const addWriteStates = () => {
         setDataWriteStates([
             ...dataWriteStates,
             {"id" : node.id, "checkState" : "checked"}
         ])
+    }
+
+    const getReadStateById = (id) => {
+        var checkState = dataReadStates.find((i) => i.id === id);
+        if(checkState != undefined){
+            return dataReadStates.find((i) => i.id === id).checkState;
+        }
+    }
+
+    const getWriteStateById = (id) => {
+        var checkState = dataWriteStates.find((i) => i.id === id);
+        if(checkState != undefined){
+            return dataWriteStates.find((i) => i.id === id).checkState;
+        }
     }
 
     return (
@@ -48,15 +58,15 @@ export const TreeNodes = ({node}) => {
                 <div className="d-flex">
                     <div>
                         <Checkbox 
-                        isChecked={false}
-                        isInbetween={false}
+                        isChecked={getReadStateById(node.id) === "checked"}
+                        isInbetween={getReadStateById(node.id) === "inbetween"}
                         onClick={addReadStates}
                         />
                     </div>
                     <div>
                         <Checkbox 
-                        isChecked={false}
-                        isInbetween={false}
+                        isChecked={getWriteStateById(node.id) === "checked"}
+                        isInbetween={getWriteStateById(node.id) === "inbetween"}
                         onClick={addWriteStates}
                         />
                     </div>
