@@ -1,0 +1,12 @@
+.d-tree-container {
+    list-style: none;
+    padding: 0;
+}
+
+.d-tree-node {
+    padding: 5px 10px;
+}
+
+.d-tree-toogler.active {
+    transform: rotate(45deg);
+}
