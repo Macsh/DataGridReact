@@ -1,5 +1,6 @@
 import React, {useContext, useState} from "react";
-import { StatesContext } from "../StatesContext";
+import { StatesReadContext } from "../StatesContext";
+import { StatesWriteContext } from "../StatesContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { Tree } from "../Tree";
@@ -8,16 +9,24 @@ import { Checkbox } from "../Checkbox";
 export const TreeNodes = ({node}) => {
 
     const [nodeVisible, setNodeVisibility] = useState(false);
-    const [dataStates, setDataStates] = useContext(StatesContext);
+    const [dataReadStates, setDataReadStates] = useContext(StatesReadContext);
+    const [dataWriteStates, setDataWriteStates] = useContext(StatesWriteContext);
     const hasChild = node.children ? true : false;
 
     // const getStateById = (id) => {
     //     return checkState.find((i) => i.id === id).state;
     // };
 
-    function addStates() {
-        setDataStates([
-            ...dataStates,
+    function addReadStates() {
+        setDataReadStates([
+            ...dataReadStates,
+            {"id" : node.id, "checkState" : "checked"}
+        ])
+    }
+
+    function addWriteStates() {
+        setDataWriteStates([
+            ...dataWriteStates,
             {"id" : node.id, "checkState" : "checked"}
         ])
     }
@@ -41,14 +50,14 @@ export const TreeNodes = ({node}) => {
                         <Checkbox 
                         isChecked={false}
                         isInbetween={false}
-                        onClick={addStates}
+                        onClick={addReadStates}
                         />
                     </div>
                     <div>
                         <Checkbox 
                         isChecked={false}
                         isInbetween={false}
-                        onClick={addStates}
+                        onClick={addWriteStates}
                         />
                     </div>
                 </div>

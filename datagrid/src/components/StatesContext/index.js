@@ -1,3 +1,4 @@
 import { createContext } from "react";
 
-export const StatesContext = createContext([]);
+export const StatesReadContext = createContext([]);
+export const StatesWriteContext = createContext([]);
