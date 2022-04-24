@@ -31,7 +31,7 @@ function getParents(arr, id) {
         if(element.id === id) {
             parentIds.push(element);
         }
-        else if(element.children) {
+        else if(element.children.length > 0) {
             const ids = getParents(element.children, id);
             if(ids.length){
                 parentIds.push(element);
@@ -53,34 +53,40 @@ export const getStateById = (id, arr) => {
 
 export const AddStates = (node, arr) => {
     const check = getStateById(node.id, arr);
-    if (check === 'unchecked'){
+    if (check === 'unchecked' || check === 'inbetween'){
         arr.find((i) => i.id === node.id).checkState = 'checked';
         if(node.children.length > 0){
             goThroughArr(node.children, arr, 'checked');
-            const parents = getParents(json.data.roots, node.id)
+        }
+        const parents = getParents(json.data.roots, node.id)
             if(parents.length > 1){
                 parents.pop();
                 parents.forEach(parent => {
                     if(goThroughArrParent(parent.children, arr, 'unchecked') === 1){
                         arr.find((i) => i.id === parent.id).checkState = 'inbetween';
-                    };
+                    }
+                    else {
+                        arr.find((i) => i.id === parent.id).checkState = 'checked';
+                    }
                 })
             }
-        }
     }
     else if (check === 'checked'){
         arr.find((i) => i.id === node.id).checkState = 'unchecked';
         if(node.children.length > 0){
             goThroughArr(node.children, arr, 'unchecked');
-            const parents = getParents(json.data.roots, node.id)
+        }
+        const parents = getParents(json.data.roots, node.id)
             if(parents.length > 0){
                 parents.pop();
                 parents.forEach(parent => {
-                    if(goThroughArrParent(parent.children, arr, 'checked') === 'inbetween'){
+                    if(goThroughArrParent(parent.children, arr, 'checked') === 1){
                         arr.find((i) => i.id === parent.id).checkState = 'inbetween';
-                    };
+                    }
+                    else {
+                        arr.find((i) => i.id === parent.id).checkState = 'unchecked';
+                    }
                 })
             }
-        }
     }
 }
