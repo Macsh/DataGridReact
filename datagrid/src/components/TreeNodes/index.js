@@ -3,6 +3,7 @@ import { StatesReadContext } from "../StatesContext";
 import { StatesWriteContext } from "../StatesContext";
 import { Tree } from "../Tree";
 import { Checkbox } from "../Checkbox";
+import json from "../../assets/Sectorisation.json";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
@@ -13,38 +14,58 @@ export const TreeNodes = ({node}) => {
     const [dataWriteStates] = useContext(StatesWriteContext);
     const hasChild = node.children ? true : false;
 
-    function addReadStates() {
-        const check = getReadStateById(node.id);
-        if (check === 'unchecked'){
-            dataReadStates.find((i) => i.id === node.id).checkState = 'checked';
-        }
-        else if (check === 'checked'){
-            dataReadStates.find((i) => i.id === node.id).checkState = 'unchecked';
-        }
+    const addReadStates = () => {
+        addStates('read');
     }
-
     const addWriteStates = () => {
-        const check = getWriteStateById(node.id);
+        addStates('write');
+    }
+
+    const addStates = (type) => {
+        var arr;
+        if(type === 'read'){
+            arr = dataReadStates;
+        }
+        else {
+            arr = dataWriteStates;
+        }
+        const check = getStateById(node.id, arr);
         if (check === 'unchecked'){
-            dataWriteStates.find((i) => i.id === node.id).checkState = 'checked';
+            arr.find((i) => i.id === node.id).checkState = 'checked';
+            if(node.children.length > 0){
+                goThroughArr(node.children, type, 'checked');
+            }
         }
         else if (check === 'checked'){
-            dataWriteStates.find((i) => i.id === node.id).checkState = 'unchecked';
+            arr.find((i) => i.id === node.id).checkState = 'unchecked';
+            if(node.children.length > 0){
+                goThroughArr(node.children, type, 'unchecked');
+            }
         }
     }
 
-    const getReadStateById = (id) => {
-        var checkState = dataReadStates.find((i) => i.id === id);
+    const getStateById = (id, arr) => {
+        var checkState = arr.find((i) => i.id === id);
         if(checkState !== undefined){
-            return dataReadStates.find((i) => i.id === id).checkState;
+            return arr.find((i) => i.id === id).checkState;
         }
     }
 
-    const getWriteStateById = (id) => {
-        var checkState = dataWriteStates.find((i) => i.id === id);
-        if(checkState !== undefined){
-            return dataWriteStates.find((i) => i.id === id).checkState;
-        }
+    function goThroughArr(node, type, state){
+        node.forEach(element => {
+            if(type === 'read'){
+                dataReadStates.find((i) => i.id === element.id).checkState = state;
+                if(element.children.length > 0){
+                    goThroughArr(element.children, 'read', state);
+                }
+            }
+            else {
+                dataWriteStates.find((i) => i.id === element.id).checkState = state;
+                if(element.children.length > 0){
+                    goThroughArr(element.children, 'write', state);
+                }
+            }
+        })
     }
 
     return (
