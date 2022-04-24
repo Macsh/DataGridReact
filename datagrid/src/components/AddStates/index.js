@@ -14,10 +14,10 @@ function goThroughArr(node, arr, state){
 function goThroughArrParent(node, arr, state){
     var check = 0;
     node.forEach(element => {
-        if(arr.find((i) => i.id === element.id).checkState === state){
+        if(arr.find((i) => i.id === element.id).checkState === state || arr.find((i) => i.id === element.id).checkState === 'inbetween'){
             check = 1;
         }
-        if (element.children.length > 0){
+        else if (element.children.length > 0){
             goThroughArrParent(element.children, arr, state);
         }
     })
@@ -61,12 +61,19 @@ export const AddStates = (node, arr) => {
         const parents = getParents(json.data.roots, node.id)
             if(parents.length > 1){
                 parents.pop();
+                console.log(parents);
                 parents.forEach(parent => {
                     if(goThroughArrParent(parent.children, arr, 'unchecked') === 1){
                         arr.find((i) => i.id === parent.id).checkState = 'inbetween';
                     }
                     else {
                         arr.find((i) => i.id === parent.id).checkState = 'checked';
+                    }
+                    if(goThroughArrParent(json.data.roots[0].children[3].children, arr, 'unchecked') === 1){
+                        arr.find((i) => i.id === json.data.roots[0].children[3].id).checkState = 'inbetween';
+                    }
+                    else {
+                        arr.find((i) => i.id === json.data.roots[0].children[3].id).checkState = 'checked';
                     }
                 })
             }
@@ -85,6 +92,12 @@ export const AddStates = (node, arr) => {
                     }
                     else {
                         arr.find((i) => i.id === parent.id).checkState = 'unchecked';
+                    }
+                    if(goThroughArrParent(json.data.roots[0].children[3].children, arr, 'unchecked') === 1){
+                        arr.find((i) => i.id === json.data.roots[0].children[3].id).checkState = 'inbetween';
+                    }
+                    else {
+                        arr.find((i) => i.id === json.data.roots[0].children[3].id).checkState = 'checked';
                     }
                 })
             }
