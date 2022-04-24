@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import { AddStates } from "../AddStates";
-import { StatesReadContext } from "../StatesContext";
+import { StatesReadContext, StatesWriteContext } from "../StatesContext";
 import { TreeNodes } from "../TreeNodes";
 import { TreeReadCheckbox } from "../TreeReadCheckbox";
 import { TreeWriteCheckbox } from "../TreeWriteCheckbox";
@@ -10,6 +10,7 @@ import './index.css';
 export const Tree = ({ datas = [] }) => {
 
     const [dataReadStates] = useContext(StatesReadContext);
+    const [dataWriteStates] = useContext(StatesWriteContext);
     const [clickedRead, setClickedRead] = useState(false);
     const [clickedWrite, setClickedWrite] = useState(false);
 
@@ -18,7 +19,7 @@ export const Tree = ({ datas = [] }) => {
     }
 
     const addWriteStates = (node) => {
-        AddStates(node, dataReadStates, 'write');
+        AddStates(node, dataWriteStates, 'write');
     }
 
 
