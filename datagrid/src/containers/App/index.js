@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from "react";
-import './App.css';
-import datas from "../../assets/Sectorisation.json";
+import { StatesReadContext, StatesWriteContext } from "../../components/StatesContext";
 import { Tree } from '../../components/Tree';
-import { StatesReadContext } from "../../components/StatesContext";
-import { StatesWriteContext } from "../../components/StatesContext";
 import { Permissions } from "../../components/Permissions";
+import datas from "../../assets/Sectorisation.json";
+import './App.css';
 
 function App() {
 
@@ -30,7 +29,7 @@ function App() {
   return (
     <StatesReadContext.Provider value={[dataReadStates, setDataReadStates]}>
       <StatesWriteContext.Provider value={[dataWriteStates, setDataWriteStates]}>
-        <div className="App">
+        <div className="App d-flex">
           <Tree datas={datas.data.roots} />
         </div>
         <Permissions />

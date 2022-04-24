@@ -1,0 +1,20 @@
+.d-tree-container {
+    list-style: none;
+    padding: 0;
+}
+
+.d-tree-node {
+    padding: 5px 10px;
+}
+
+.d-tree-toggler.active {
+    visibility: hidden;
+}
+
+.d-tree-toggler.active::after{
+    margin-left:-16px;
+    content: "–\a0\a0";
+    display: inline;
+    position: relative;
+    visibility: visible;
+}
