@@ -11,8 +11,7 @@ export const Tree = ({ datas = [] }) => {
 
     const [dataReadStates] = useContext(StatesReadContext);
     const [dataWriteStates] = useContext(StatesWriteContext);
-    const [clickedRead, setClickedRead] = useState(false);
-    const [clickedWrite, setClickedWrite] = useState(false);
+    const [clicked, setClicked] = useState(false);
 
     const addReadStates = (node) => {
         AddStates(node, dataReadStates);
@@ -24,15 +23,15 @@ export const Tree = ({ datas = [] }) => {
 
 
     return (
-        <div className="d-tree">
+        <div className="d-tree" onClick={e => setClicked(v => !v)}>
             <ul className="d-tree-container flex-column">
                 {datas.map((data) => (
                     <div key={data.id} className="d-flex">
                         <TreeNodes node={data}/>
-                            <div onClick={e => setClickedRead(v => !v)}>
+                            <div>
                             <TreeReadCheckbox node={data} onClick={addReadStates}/>
                             </div>
-                            <div onClick={e => setClickedWrite(v => !v)}>
+                            <div>
                             <TreeWriteCheckbox node={data} onClick={addWriteStates}/>
                             </div>
                     </div>
