@@ -12,54 +12,39 @@ export const Checkbox = ({ type, id, onClick = () => {} }) => {
     const [dataWriteStates] = useContext(StatesWriteContext);
 
     const isChecked = () => {
+        var arr;
         if(type === 'read'){
-            if(getReadStateById(id) === "checked"){
-                setChecked(true);
-            }
-            else {
-                setChecked(false);
-            }
-            if(getReadStateById(id) === "inbetween"){
-                setInbetween(true);
-            }
-            else {
-                setInbetween(false);
-            }
+            arr=dataReadStates;
         }
         else {
-            if(getWriteStateById(id) === "checked"){
-                setChecked(true);
-            }
-            else {
-                setChecked(false);
-            }
-            if(getWriteStateById(id) === "inbetween"){
-                setInbetween(true);
-            }
-            else {
-                setInbetween(false);
-            }
+            arr=dataWriteStates;
+        }
+        if(getStateById(id, arr) === "checked"){
+            setChecked(true);
+        }
+        else {
+            setChecked(false);
+        }
+        if(getStateById(id, arr) === "inbetween"){
+            setInbetween(true);
+        }
+        else {
+            setInbetween(false);
         }
     }
 
-    const getReadStateById = (id) => {
-        var checkState = dataReadStates.find((i) => i.id === id);
+    const getStateById = (id, arr) => {
+        var checkState = arr.find((i) => i.id === id);
         if(checkState !== undefined){
-            return dataReadStates.find((i) => i.id === id).checkState;
-        }
-    }
-
-    const getWriteStateById = (id) => {
-        var checkState = dataWriteStates.find((i) => i.id === id);
-        if(checkState !== undefined){
-            return dataWriteStates.find((i) => i.id === id).checkState;
+            return arr.find((i) => i.id === id).checkState;
         }
     }
 
     useEffect( () => {
+        isChecked();
     }, [refreshState]);
 
     return(
-        <span onClick={function(e){onClick(); setRefreshState(current => !current); isChecked();}} className={`checkbox ${ checked ? "isChecked" : ""} ${ inbetween ? "isInbetween" : ""}`}></span>
+        <span onClick={function(e){onClick(); setRefreshState(current => !current);}} className={`checkbox ${ checked ? "isChecked" : ""} ${ inbetween ? "isInbetween" : ""}`}></span>
     );
 };
