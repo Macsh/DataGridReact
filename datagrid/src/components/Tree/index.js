@@ -15,11 +15,11 @@ export const Tree = ({ datas = [] }) => {
     const [clickedWrite, setClickedWrite] = useState(false);
 
     const addReadStates = (node) => {
-        AddStates(node, dataReadStates, 'read');
+        AddStates(node, dataReadStates);
     }
 
     const addWriteStates = (node) => {
-        AddStates(node, dataWriteStates, 'write');
+        AddStates(node, dataWriteStates);
     }
 
 

@@ -9,8 +9,7 @@ import './index.css';
 export const TreeReadCheckbox = ({node, onClick = () => {} }) => {
 
     const hasChild = node.children ? true : false;
-    const [nodeVisible, setNodeVisibility] = useState(false);
-    const [clicked, setClicked] = useState(false);
+    const [nodeVisible] = useState(false);
     const [dataReadStates] = useContext(StatesReadContext);
 
     return (
