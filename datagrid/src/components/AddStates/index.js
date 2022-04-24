@@ -1,4 +1,3 @@
-import { createPortal } from "react-dom";
 import json from "../../assets/Sectorisation.json";
 
 
