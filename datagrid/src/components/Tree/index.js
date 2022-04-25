@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import { AddStates } from "../AddStates";
 import { StatesReadContext, StatesWriteContext } from "../StatesContext";
 import { TreeNodes } from "../TreeNodes";
@@ -22,17 +22,16 @@ export const Tree = ({ datas = [] }) => {
 
 
     return (
-        <div className="d-tree">
+        <div>
             <ul className="d-tree-container flex-column">
                 {datas.map((data) => (
-                    <div key={data.id} className="d-flex">
+                    <div key={data.id} className="d-flex justify-content-between">
+                        <div className="borders border-bottom"></div>
                         <TreeNodes node={data}/>
-                            <div>
-                            <TreeReadCheckbox node={data} onClick={addReadStates}/>
-                            </div>
-                            <div>
-                            <TreeWriteCheckbox node={data} onClick={addWriteStates}/>
-                            </div>
+                        <div className="d-flex d-checkbox justify-content-between">
+                        <TreeReadCheckbox node={data} onClick={addReadStates}/>
+                        <TreeWriteCheckbox node={data} onClick={addWriteStates}/>
+                        </div>
                     </div>
                 ))}
             </ul>

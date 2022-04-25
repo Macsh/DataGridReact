@@ -3,7 +3,7 @@ import { StatesReadContext, StatesWriteContext } from "../../components/StatesCo
 import { Tree } from '../../components/Tree';
 import { Permissions } from "../../components/Permissions";
 import datas from "../../assets/Sectorisation.json";
-import './App.css';
+import './index.css';
 
 function App() {
 
@@ -30,9 +30,18 @@ function App() {
   return (
     <StatesReadContext.Provider value={[dataReadStates, setDataReadStates]}>
       <StatesWriteContext.Provider value={[dataWriteStates, setDataWriteStates]}>
-        <div className="App"  onClick={e => setClicked(v => !v)}>
+        <div className="d-tree border border-dark m-auto mt-5 mb-5"  onClick={e => setClicked(v => !v)}>
+          <div className="d-flex d-top border-bottom border-dark justify-content-between">
+            <span>Stores</span>
+            <div className="d-flex d-top-box justify-content-between">
+              <div>Read</div>
+              <div>Write</div>
+            </div>
+          </div>
           <Tree datas={datas.data.roots} />
+          <div className="border-top border-dark">
           <Permissions />
+          </div>
         </div>
       </StatesWriteContext.Provider>
     </StatesReadContext.Provider>

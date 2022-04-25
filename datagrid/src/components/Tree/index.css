@@ -1,12 +1,49 @@
+.d-tree {
+    border: 1px black solid;
+}
+
 .d-tree-container {
     list-style: none;
-    padding: 0;
+    width: 1000px;
 }
 
 .d-tree-node {
     padding: 5px 10px;
 }
 
-.d-tree-toogler.active {
-    transform: rotate(45deg);
+.borders {
+    position: absolute;
+    width: 1500px;
+    right: 200px;
+    margin-top: 0px;
+}
+
+.d-tree-head {
+    cursor: pointer;
+    transition: all 0.2s linear;
+    border-radius: 5px;
+    max-width: 250px;
+    padding: 0 6px;
+    margin: 3px 0;
+}
+
+.d-tree-head:hover {
+    background-color: rgba(0, 110, 255, 0.486);
+}
+
+.d-checkbox {
+    position: absolute;
+    right: 490px;
+}
+
+.d-tree-toggler.active {
+    visibility: hidden;
+}
+
+.d-tree-toggler.active::after{
+    margin-left:-16px;
+    content: "–\a0\a0";
+    display: inline;
+    position: relative;
+    visibility: visible;
 }

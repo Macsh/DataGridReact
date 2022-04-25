@@ -4,7 +4,7 @@ import { Checkbox } from "../Checkbox";
 import { getStateById } from "../AddStates";
 import { StatesReadContext } from "../StatesContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import '../Tree/index.css';
 
 export const TreeReadCheckbox = ({node, onClick = () => {} }) => {
 
