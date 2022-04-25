@@ -11,7 +11,6 @@ export const Tree = ({ datas = [] }) => {
 
     const [dataReadStates] = useContext(StatesReadContext);
     const [dataWriteStates] = useContext(StatesWriteContext);
-    const [clicked, setClicked] = useState(false);
 
     const addReadStates = (node) => {
         AddStates(node, dataReadStates);
@@ -23,7 +22,7 @@ export const Tree = ({ datas = [] }) => {
 
 
     return (
-        <div className="d-tree" onClick={e => setClicked(v => !v)}>
+        <div className="d-tree">
             <ul className="d-tree-container flex-column">
                 {datas.map((data) => (
                     <div key={data.id} className="d-flex">

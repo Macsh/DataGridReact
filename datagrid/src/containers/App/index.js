@@ -10,6 +10,7 @@ function App() {
   const array = datas.data.roots;
   const defaultItemReadStates = [];
   const defaultItemWriteStates = [];
+  const [clicked, setClicked] = useState(false);
 
   const iteration = (arr) => arr.forEach(element => {
     defaultItemReadStates.push({id: element.id, checkState: 'unchecked'})
@@ -29,10 +30,10 @@ function App() {
   return (
     <StatesReadContext.Provider value={[dataReadStates, setDataReadStates]}>
       <StatesWriteContext.Provider value={[dataWriteStates, setDataWriteStates]}>
-        <div className="App d-flex">
+        <div className="App"  onClick={e => setClicked(v => !v)}>
           <Tree datas={datas.data.roots} />
+          <Permissions />
         </div>
-        <Permissions />
       </StatesWriteContext.Provider>
     </StatesReadContext.Provider>
   );
