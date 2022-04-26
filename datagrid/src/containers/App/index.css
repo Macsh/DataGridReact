@@ -1,13 +1,13 @@
 .d-tree {
-    width: 1500px;
+    width: 1000px;
 }
 
 .d-top {
-    padding: 0 340px 0 60px;
+    padding: 0 100px 0 60px;
     font-weight: bold;
     font-size: 20px;
 }
 
 .d-top-box {
-    width: 220px;
+    width: 250px;
 }

@@ -5,17 +5,16 @@
 .d-tree-container {
     list-style: none;
     width: 1000px;
+    padding: 0;
 }
 
 .d-tree-node {
-    padding: 5px 10px;
+    width: 200px;
 }
 
 .borders {
     position: absolute;
-    width: 1480px;
-    right: 215px;
-    margin-top: 0px;
+    width: 998px;
 }
 
 .d-tree-head {
@@ -24,7 +23,7 @@
     border-radius: 5px;
     max-width: 250px;
     padding: 0 6px;
-    margin: 3px 0;
+    margin: 5px 0;
 }
 
 .d-tree-head:hover {
@@ -32,8 +31,7 @@
 }
 
 .d-checkbox {
-    position: absolute;
-    right: 490px;
+    padding: 0;
 }
 
 .d-tree-toggler.active {
@@ -41,7 +39,7 @@
 }
 
 .d-tree-toggler.active::after{
-    margin-left:-16px;
+    margin-left:-10px;
     content: "–\a0\a0";
     display: inline;
     position: relative;
