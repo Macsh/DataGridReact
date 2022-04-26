@@ -1,8 +1,8 @@
 import React, {useContext, useState} from "react";
 import { Tree } from "../Tree";
 import { Checkbox } from "../Checkbox";
-import { getStateById } from "../AddStates";
-import { StatesWriteContext } from "../StatesContext";
+import { getStateById } from "../ChangeCheckboxStates";
+import { StatesWriteContext } from "../Contexts";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Tree/index.css';
 

@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import { AddStates } from "../AddStates";
-import { StatesReadContext, StatesWriteContext } from "../StatesContext";
+import { AddStates } from "../ChangeCheckboxStates";
+import { StatesReadContext, StatesWriteContext } from "../Contexts";
 import { TreeNodes } from "../TreeNodes";
 import { TreeReadCheckbox } from "../TreeReadCheckbox";
 import { TreeWriteCheckbox } from "../TreeWriteCheckbox";

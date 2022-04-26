@@ -1,10 +1,9 @@
 import React, {useContext} from "react";
-import { StatesReadContext } from "../StatesContext";
-import { StatesWriteContext } from "../StatesContext";
+import { StatesReadContext, StatesWriteContext } from "../Contexts";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
-export const Permissions = () => {
+export const DisplayPermissions = () => {
     const [dataReadStates] = useContext(StatesReadContext);
     const [dataWriteStates] = useContext(StatesWriteContext);
 

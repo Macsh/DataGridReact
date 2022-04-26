@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { StatesReadContext, StatesWriteContext } from "../../components/StatesContext";
+import { StatesReadContext, StatesWriteContext } from "../../components/Contexts";
 import { Tree } from '../../components/Tree';
-import { Permissions } from "../../components/Permissions";
+import { DisplayPermissions } from "../../components/DisplayPermissions";
 import datas from "../../assets/Sectorisation.json";
 import './index.css';
 
@@ -22,6 +22,7 @@ function App() {
 
   useEffect(()=>{
     iteration(array);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const [dataReadStates, setDataReadStates] = useState(defaultItemReadStates);
@@ -40,7 +41,7 @@ function App() {
           </div>
           <Tree datas={datas.data.roots} />
           <div className="border-top border-dark">
-          <Permissions />
+          <DisplayPermissions />
           </div>
         </div>
       </StatesWriteContext.Provider>
